@@ -1,5 +1,6 @@
 ## Project Members
 - Student ID: 6395626
+- Student ID: 6400786
 
 # Cardio Data Simulator
 
