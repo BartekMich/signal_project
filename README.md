@@ -18,10 +18,30 @@
       Attributes: matchingCryteria
       Methods: matchData() - tries to find matching patient based on given record, isMatch() - checks if record matches patient based on some rules.
       Handles logic for matching PatientRecords with an existing HospitalPatient. It attempts to match exactly one patient, there might or might not be a match (0 or 1).
- - IndentifyManager:
+ - IndentityManager:
       Attributes: patientDatabase, identifier
       Methods: findPatient() - finds matching patient, handleMismatch() - handles a mismatch (e.g. sends an alert to human stuff or register new patient using registerNewPatient methods), registerNewPatient() - creates new HospitalPatient instance when needed, adds it to patientDataBase, and returns it. 
-      Maganes all patients, finds or creates patients based on incoming data. IndentifyManager manages many patients. It owns one PatientIndentifier if Manager dies, so does the Indentifier (composition). 
+      Maganes all patients, finds or creates patients based on incoming data. IndentifyManager manages many patients. It owns one PatientIndentifier if Manager dies, so does the Indentifier (composition).
+
+4. Data Access Layer
+ - DataListener:
+      Common abstract class for all the data sources.
+      Methods: listen() - abstract method implemented differently depending on the source (TCP, WebSocket, File).
+ - TCP/WebSocket/FileDataListener:
+      Attributes: sourceConfig, dataParser, dataSourceAdapter
+      Methods: listen() - Retrieves raw data, parses it and passes it to DataSourceAdapter using dataAdapter.recieveRecords().
+ - DataParser:
+      Attributes: inputFormat (CSV, JSON)
+      Methods: parse() - Converts raw string into PatientRecord
+      Decouples parsing logic from listeners.
+ - DataSourceAdapter:
+      Attributes: identityManager, dataStorage
+      Methods: recieveRecords() - called by listeners after parsing
+      Central adapter between external inputs and internal system.
+ - IndentityManager:
+      Look Patient Indentification System
+ - DataStorage:
+      Stores all patient-related data in memory.
    
 
 # Cardio Data Simulator
