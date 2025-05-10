@@ -10,7 +10,7 @@
       Attributes: patientId, records
       Methods: addRecord() - adds a PatientRecord to the records
       Represent a patient in the Hospital. Patient can have multiple patient records, but records can exist without a patient, so HospitalPatient - PatientRecord uses aggregation.
- - HospitalRecord: 
+ - PatientRecord: 
       Attributes: patientId, recordType, measurementValue, timestamp
       Methods: getters for attributes
       Represents a single medical record. It is used by PatientIndentifier to match patient with the record.
