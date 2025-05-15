@@ -51,7 +51,21 @@ public class Patient {
      * @return a list of PatientRecord objects that fall within the specified time
      *         range
      */
-    // public List<PatientRecord> getRecords(long startTime, long endTime) {
-    //     // TODO Implement and test this method
-    // }
+    public List<PatientRecord> getRecords( long timeStart, long timeEnd) {
+        List<PatientRecord> result = new ArrayList<>();
+        for (PatientRecord record : patientRecords) {
+            
+                if(record.getTimestamp() >= timeStart && record.getTimestamp() <= timeEnd){
+                    result.add(record);
+                }
+                
+            
+        }
+        return result;
+    }
+
+    public int getPatientId(){
+        return patientId;
+    }
+
 }

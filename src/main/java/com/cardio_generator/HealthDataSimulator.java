@@ -15,10 +15,14 @@ import com.cardio_generator.outputs.FileOutputStrategy;
 import com.cardio_generator.outputs.OutputStrategy;
 import com.cardio_generator.outputs.TcpOutputStrategy;
 import com.cardio_generator.outputs.WebSocketOutputStrategy;
+import com.data_management.DataStorage;
+import com.data_management.PatientRecord;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,14 +38,19 @@ public class HealthDataSimulator {
 
     public static void main(String[] args) throws IOException {
 
-        parseArguments(args);
+        //parseArguments(args);
 
-        scheduler = Executors.newScheduledThreadPool(patientCount * 4);
+        //scheduler = Executors.newScheduledThreadPool(patientCount * 4);
 
-        List<Integer> patientIds = initializePatientIds(patientCount);
-        Collections.shuffle(patientIds); // Randomize the order of patient IDs
+        //List<Integer> patientIds = initializePatientIds(patientCount);
+        //Collections.shuffle(patientIds); // Randomize the order of patient IDs
 
-        scheduleTasksForPatients(patientIds);
+        //scheduleTasksForPatients(patientIds);
+
+       
+        
+
+
     }
 
     /**

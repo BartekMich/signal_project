@@ -5,6 +5,9 @@
 ## UML Models [uml_models](uml_models)
 
 
+1. Alert Generation System
+
+
 3. Patient Identification System 
  - HospitalPatient: 
       Attributes: patientId, records
