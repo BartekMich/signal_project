@@ -1,30 +1,24 @@
 package com.data_management;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;//Added concurrect HashMap to ensure safety of read-modify-write operation and to avoid race conditions
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Singleton version of the DataStorage class that manages patient records.
  */
 public class DataStorageSingleton {
     private static DataStorageSingleton instance;
-    private Map<Integer, Patient> patientMap; // Stores patient objects indexed by their unique patient ID.
+    private Map<Integer, Patient> patientMap;
 
-    /**
-     * Private constructor to enforce Singleton pattern.
-     */
+  
     private DataStorageSingleton() {
         this.patientMap = new ConcurrentHashMap<>();
     }
 
-    /**
-     * Provides access to the singleton instance of DataStorage.
-     *
-     * @return the singleton instance
-     */
+   
     public static synchronized DataStorageSingleton getInstance() {
         if (instance == null) {
             instance = new DataStorageSingleton();
@@ -41,13 +35,13 @@ public class DataStorageSingleton {
      * @param timestamp        the time at which the measurement was taken, in milliseconds since the Unix epoch
      */
     public void addPatientData(int patientId, double measurementValue, String recordType, long timestamp) {
-        // Compute or create patient atomically
+       
         patientMap.compute(patientId, (id, patient) -> {
             if (patient == null) {
                 patient = new Patient(patientId);
             }
             synchronized (patient) {
-                // Check if a record with the same timestamp and type already exists to avoid duplicates
+               
                 boolean duplicate = patient.getRecords(timestamp, timestamp).stream().anyMatch(r -> r.getRecordType().equals(recordType));
 
                 if (!duplicate) {

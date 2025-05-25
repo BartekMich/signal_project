@@ -10,8 +10,8 @@ public class RealTimeDataReaderTest {
     public void testStartStopReading() {
         assertDoesNotThrow(() -> {
             RealTimeDataReader reader = new RealTimeDataReader("ws://localhost:8887");
-            reader.startReading();  // assumes WebSocketOutputStrategy is running
-            Thread.sleep(2000);     // let it receive some data
+            reader.startReading();  
+            Thread.sleep(2000);    
             reader.stopReading();
         });
     }

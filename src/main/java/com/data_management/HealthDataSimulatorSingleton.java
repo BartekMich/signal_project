@@ -23,16 +23,12 @@ public class HealthDataSimulatorSingleton {
     private OutputStrategy outputStrategy = new ConsoleOutputStrategy();
     private final Random random = new Random();
 
-    /**
-     * Private constructor to enforce singleton pattern.
-     */
+  
     private HealthDataSimulatorSingleton() {
-        // Private constructor
+        
     }
 
-    /**
-     * Returns the singleton instance of HealthDataSimulator.
-     */
+   
     public static synchronized HealthDataSimulatorSingleton getInstance() {
         if (instance == null) {
             instance = new HealthDataSimulatorSingleton();

@@ -11,7 +11,7 @@ class HeartRateStrategyTest {
     @Test
     void testHighHeartRateTriggersAlert() {
         Patient patient = new Patient(1);
-        patient.addRecord(130.0, "HeartRate", 1000L);  // Above upper threshold
+        patient.addRecord(130.0, "HeartRate", 1000L); 
 
         HeartRateStrategy strategy = new HeartRateStrategy();
         Alert alert = strategy.checkAlert(patient);
@@ -24,7 +24,7 @@ class HeartRateStrategyTest {
     @Test
     void testLowHeartRateTriggersAlert() {
         Patient patient = new Patient(2);
-        patient.addRecord(45.0, "HeartRate", 2000L);  // Below lower threshold
+        patient.addRecord(45.0, "HeartRate", 2000L);  
 
         HeartRateStrategy strategy = new HeartRateStrategy();
         Alert alert = strategy.checkAlert(patient);
@@ -37,7 +37,7 @@ class HeartRateStrategyTest {
     @Test
     void testNormalHeartRateDoesNotTriggerAlert() {
         Patient patient = new Patient(3);
-        patient.addRecord(80.0, "HeartRate", 3000L);  // Normal range
+        patient.addRecord(80.0, "HeartRate", 3000L);  
 
         HeartRateStrategy strategy = new HeartRateStrategy();
         Alert alert = strategy.checkAlert(patient);

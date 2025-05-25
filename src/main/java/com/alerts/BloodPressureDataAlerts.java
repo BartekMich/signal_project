@@ -43,7 +43,7 @@ public class BloodPressureDataAlerts implements AlertTester {
         List<PatientRecord> systolic = new ArrayList<>();
         List<PatientRecord> diastolic = new ArrayList<>();
 
-        // Separate the records by type
+        
         for (PatientRecord record : allRecords) {
             String type = record.getRecordType();
             if (type.equalsIgnoreCase("SystolicBloodPressure")) {
@@ -53,14 +53,14 @@ public class BloodPressureDataAlerts implements AlertTester {
             }
         }
 
-        // Check threshold breaches first
+      
         Alert systolicThreshold = checkCriticalThreshold(systolic, 90, 180, "SystolicBloodPressure", patient);
         if (!systolicThreshold.getCondition().equals("none")) return systolicThreshold;
 
         Alert diastolicThreshold = checkCriticalThreshold(diastolic, 60, 120, "DiastolicBloodPressure", patient);
         if (!diastolicThreshold.getCondition().equals("none")) return diastolicThreshold;
 
-        // Then check for increasing/decreasing trends
+        
         Alert systolicTrend = checkTrend(systolic, "SystolicBloodPressure", patient);
         if (!systolicTrend.getCondition().equals("none")) return systolicTrend;
 

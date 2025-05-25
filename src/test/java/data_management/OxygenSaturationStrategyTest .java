@@ -69,7 +69,7 @@ class OxygenSaturationStrategyTest {
         OxygenSaturationStrategy strategy = new OxygenSaturationStrategy();
         Alert alert = strategy.checkAlert(patient);
 
-        // Should fallback to low saturation instead
+       
         assertTrue(alert.getCondition().contains("Low Blood Oxygen Saturation"));
         assertEquals("5", alert.getPatientId());
     }

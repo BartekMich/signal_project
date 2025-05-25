@@ -55,11 +55,11 @@ public class FileDataReader implements DataReader {
 
     @Override
     public void startReading(){
-        //Not used in this class
+        
     }
 
     @Override
     public void stopReading(){
-        //Not used in this class
+        
     }
 }

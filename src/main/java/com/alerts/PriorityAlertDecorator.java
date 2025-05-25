@@ -8,7 +8,7 @@ package com.alerts;
  * alerts that require more immediate attention.
  *
  * Example use case:
- * - Marking alerts as "HIGH", "MEDIUM", or "LOW" priority to support triage workflows.
+ * - Marking alerts as "HIGH", "MEDIUM", or "LOW" priority.
  */
 class PriorityAlertDecorator extends AlertDecorator {
     private final String priorityLevel;

@@ -14,11 +14,7 @@ import java.util.List;
  *     Low systolic blood pressure — below 90 mmHg
  *     Low blood oxygen saturation — below 92%
  * 
- * within a close time proximity (≤ 5 minutes apart).
- *
- * Use Case:
- * This alert is used to detect potential signs of shock, organ hypoperfusion,
- * or severe respiratory compromise — situations that demand immediate clinical attention.
+ * within a close time proximity (=<) 5 minutes apart).
  *
  * Assumptions:
  * 
@@ -44,7 +40,7 @@ public class HypotensiveHypoxemiaAlert implements AlertTester {
         List<PatientRecord> systolicRecords = new ArrayList<>();
         List<PatientRecord> saturationRecords = new ArrayList<>();
 
-        // Separate relevant measurement types
+       
         for (PatientRecord record : allRecords) {
             String type = record.getRecordType();
             if (type.equalsIgnoreCase("SystolicBloodPressure")) {
@@ -54,7 +50,7 @@ public class HypotensiveHypoxemiaAlert implements AlertTester {
             }
         }
 
-        // Cross-match low systolic and low saturation readings within a 5-minute window
+        
         for (PatientRecord bp : systolicRecords) {
             if (bp.getMeasurementValue() < 90.0) {
                 for (PatientRecord oxy : saturationRecords) {
@@ -73,7 +69,7 @@ public class HypotensiveHypoxemiaAlert implements AlertTester {
             }
         }
 
-        // No matching condition found
+     
         return new Alert(String.valueOf(patient.getPatientId()), "none", System.currentTimeMillis());
     }
 }

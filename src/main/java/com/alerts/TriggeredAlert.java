@@ -23,7 +23,7 @@ public class TriggeredAlert {
             case "alert: resolved":
                 return new Alert(String.valueOf(patient.getPatientId()),"Manual Resolved Alert", timestamp);
             default:
-                return null; // Ignore irrelevant messages
+                return null; 
         }
     }
 }

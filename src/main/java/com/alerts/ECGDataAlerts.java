@@ -40,7 +40,7 @@ public class ECGDataAlerts implements AlertTester {
     /**
      * Checks ECG records for abnormal peaks based on sliding window average analysis.
      *
-     * If a patient's ECG value exceeds the current window's average × 1.5,
+     * If a patient's ECG value exceeds the current window's average x 1.5,
      * an alert is generated with timestamp and condition details.
      *
      * @param patient the patient whose ECG data is being evaluated
@@ -51,20 +51,20 @@ public class ECGDataAlerts implements AlertTester {
         List<PatientRecord> allRecords = patient.getRecords(0, Long.MAX_VALUE);
         List<PatientRecord> ecgRecords = new ArrayList<>();
 
-        // Filter only ECG records
+  
         for (PatientRecord record : allRecords) {
             if (record.getRecordType().equalsIgnoreCase("ECG")) {
                 ecgRecords.add(record);
             }
         }
 
-        // Sort ECG records by timestamp to ensure proper order for sliding window
+       
         ecgRecords.sort(Comparator.comparingLong(PatientRecord::getTimestamp));
 
         for (PatientRecord record : ecgRecords) {
             double value = record.getMeasurementValue();
 
-            // Maintain the sliding window sum
+          
             if (window.size() == WINDOW_SIZE) {
                 windowSum -= window.removeFirst();
             }

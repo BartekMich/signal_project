@@ -4,39 +4,27 @@ import com.data_management.Patient;
 import java.util.List;
 
 /**
- * AlertGeneratorNEW is a singleton class responsible for evaluating a single patient's data
+ * AlertGeneratorNEW is a singleton class responsible for evaluating a single patients data
  * using a list of alert strategies. Each strategy represents a health metric or condition
  * that should be checked for potential alerts.
- *
- * This design allows flexibility and extensibility in determining which strategies
- * to apply during runtime and ensures that alerts are processed and decorated consistently
- * using appropriate factories.
  */
-public class AlertGeneratorNEW {
+public class AlertGeneratorWeek4 {
 
-    private static AlertGeneratorNEW instance;
+    private static AlertGeneratorWeek4 instance;
 
     private final AlertFactory bloodPressureFactory = new BloodPressureAlertFactory();
     private final AlertFactory bloodOxygenFactory = new BloodOxygenAlertFactory();
     private final AlertFactory ecgFactory = new ECGAlertFactory();
 
-    /**
-     * Private constructor to enforce the singleton pattern.
-     * Use getInstance() to obtain the shared instance.
-     */
-    private AlertGeneratorNEW() {
-        // private constructor for singleton
+ 
+    private AlertGeneratorWeek4() {
+    
     }
 
-    /**
-     * Returns the singleton instance of AlertGeneratorNEW.
-     * If no instance exists, it will be created.
-     *
-     * @return the shared instance of AlertGeneratorNEW
-     */
-    public static synchronized AlertGeneratorNEW getInstance() {
+
+    public static synchronized AlertGeneratorWeek4 getInstance() {
         if (instance == null) {
-            instance = new AlertGeneratorNEW();
+            instance = new AlertGeneratorWeek4();
         }
         return instance;
     }
@@ -63,7 +51,6 @@ public class AlertGeneratorNEW {
     /**
      * Uses the appropriate alert factory to create a more specific decorated alert,
      * based on the type of strategy that triggered it.
-     * This helps in categorizing alerts and customizing their behavior or message.
      *
      * @param strategy the strategy that triggered the alert
      * @param baseAlert the original alert returned by the strategy
@@ -77,7 +64,7 @@ public class AlertGeneratorNEW {
         } else if (strategy instanceof HeartRateStrategy || strategy instanceof ECGAlertFactory) {
             return ecgFactory.createAlert(baseAlert.getPatientId(), baseAlert.getCondition(), baseAlert.getTimestamp());
         }
-        return baseAlert; // fallback to the original alert if no factory matches
+        return baseAlert; 
     }
 
     /**

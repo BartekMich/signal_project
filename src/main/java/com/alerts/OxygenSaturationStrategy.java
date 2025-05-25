@@ -43,14 +43,13 @@ public class OxygenSaturationStrategy implements AlertStrategy {
 
         oxygen.sort(Comparator.comparingLong(PatientRecord::getTimestamp));
 
-        // Check for a rapid drop of 5% or more within 10 minutes
+        
         for (int i = 0; i < oxygen.size(); i++) {
             PatientRecord earlier = oxygen.get(i);
             for (int j = i + 1; j < oxygen.size(); j++) {
                 PatientRecord later = oxygen.get(j);
                 long timeDiff = later.getTimestamp() - earlier.getTimestamp();
-                if (timeDiff > 600_000) break; // Stop if readings are more than 10 minutes apart
-
+                if (timeDiff > 600_000) break; 
                 double drop = earlier.getMeasurementValue() - later.getMeasurementValue();
                 if (drop >= 5.0) {
                     return new Alert(
@@ -63,7 +62,7 @@ public class OxygenSaturationStrategy implements AlertStrategy {
             }
         }
 
-        // Check for low saturation below 92%
+        
         for (PatientRecord record : oxygen) {
             if (record.getMeasurementValue() < 92.0) {
                 return new Alert(

@@ -31,10 +31,10 @@ class AlertGeneratorNEWTest {
         List<AlertStrategy> strategies = new ArrayList<>();
         strategies.add(new DummyAlertStrategy());
 
-        AlertGeneratorNEW generator = AlertGeneratorNEW.getInstance();
+        AlertGeneratorWeek4 generator = AlertGeneratorWeek4.getInstance();
         generator.evaluatePatient(patient, strategies);
 
-        // Output is printed to console — check manually or redirect output for assert
+        
     }
 
     @Test
@@ -43,16 +43,16 @@ class AlertGeneratorNEWTest {
         List<AlertStrategy> strategies = new ArrayList<>();
         strategies.add(new NoOpAlertStrategy());
 
-        AlertGeneratorNEW generator = AlertGeneratorNEW.getInstance();
+        AlertGeneratorWeek4 generator = AlertGeneratorWeek4.getInstance();
         generator.evaluatePatient(patient, strategies);
 
-        // No output expected; test passes if no exceptions occur
+        
     }
 
     @Test
     void testSingletonInstanceNotNull() {
-        AlertGeneratorNEW generator1 = AlertGeneratorNEW.getInstance();
-        AlertGeneratorNEW generator2 = AlertGeneratorNEW.getInstance();
+        AlertGeneratorWeek4 generator1 = AlertGeneratorWeek4.getInstance();
+        AlertGeneratorWeek4 generator2 = AlertGeneratorWeek4.getInstance();
         assertSame(generator1, generator2, "Singleton instances should be the same");
     }
 }

@@ -13,12 +13,7 @@ public class Patient {
     private int patientId;
     private List<PatientRecord> patientRecords;
 
-    /**
-     * Constructs a new Patient with a specified ID.
-     * Initializes an empty list of patient records.
-     *
-     * @param patientId the unique identifier for the patient
-     */
+ 
     public Patient(int patientId) {
         this.patientId = patientId;
         this.patientRecords = new ArrayList<>();

@@ -5,7 +5,7 @@ import com.data_management.Patient;
 import java.util.List;
 
 /**
- * The {@code AlertGenerator} class is responsible for evaluating patient health data
+ * This class is responsible for evaluating patient health data
  * and generating alerts based on a set of predefined medical conditions.
  *
  * It serves as the main orchestrator that connects {@link Patient} data from the
@@ -14,10 +14,9 @@ import java.util.List;
  * used to evaluate patients.
  *
  * Assumption: Alerts are checked independently and sequentially. If multiple alerts are triggered,
- * each one is immediately printed. The alerting process could be extended in future
- * to log alerts or integrate with notification systems.
+ * each one is immediately printed. 
  */
-public class AlertGenerator {
+public class AlertGeneratorWeek3 {
     private final DataStorage dataStorage;
 
     /**
@@ -25,7 +24,7 @@ public class AlertGenerator {
      *
      * @param dataStorage the storage system containing all patient data
      */
-    public AlertGenerator(DataStorage dataStorage) {
+    public AlertGeneratorWeek3(DataStorage dataStorage) {
         this.dataStorage = dataStorage;
     }
 

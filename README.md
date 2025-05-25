@@ -6,7 +6,84 @@
 
 
 1. Alert Generation System
+
+    Patient:
+    Attributes:
+    patientId, patientRecords
+    Methods:
+    addRecord() – adds a PatientRecord to the list of records.
+    Represents an individual in the healthcare system. A Patient can have multiple PatientRecord entries. Aggregation is used between Patient and PatientRecord since records can exist independently of the patient.
+
+    PatientRecord:
+    Attributes:
+    patientId, recordType, measurementValue, timestamp
+    Methods:
+    getters for all attributes.
+    Represents a single measurement or observation for a patient. Used by the system to track medical data over time.
+
+    DataStorage:
+    Attributes:
+    patientMap – a mapping from patient IDs to Patient objects
+    Methods:
+    getAllPatients() – returns a list of all patients
+    getRecord() – returns records for a patient in a given time range
+    addPatient() – adds a record to an existing patient or creates a new patient if needed
+    Manages all patient data in memory. Composed of Patient objects.
+
+    Alert:
+    Attributes:
+    patientId, condition, timestamp
+    Methods:
+    getters for all attributes
+    Represents a medical alert triggered by an abnormal condition.
+
+    AlertGenerator:
+    Attributes:
+    dataStorage – a reference to the data storage
+    Methods:
+    evaluateData(Patient) – evaluates a patient's data for potential alerts
+    triggerAlert(Alert) – triggers an alert if a condition is met
+    Responsible for analyzing patient data and deciding whether to issue alerts. It uses DataStorage for access to records. Composed within the system.
+
+    AlertManager:
+    Attributes: 
+    Methods:
+    sendAlert(Alert, OutputStrategy, Patient) – sends the alert using the specified output method
+    Handles how alerts are delivered or communicated, using different strategies as needed.
+
+2. Data Storage System
+
+    Patient:
+    Attributes:
+    patientId, patientRecords
+    Methods:
+    addRecord() – adds a PatientRecord to the internal list
+    Represents a patient in the system. Each patient can have multiple medical records. Aggregation is used between Patient and PatientRecord, records can exist without a patient.
+
+    PatientRecord:
+    Attributes:
+    patientId, recordType, measurementValue, timestamp
+    Methods:
+    getters for each attribute
+    Represents a single medical measurement or event. Used to analyze and retrieve patient data over time.
+
+    DataStorage:
+    Attributes:
+    patientMap – a map linking patient IDs to their corresponding Patient objects
+    Methods:
+    getAllPatients() – returns all patients
+    getRecord() – returns all records for a specific patient within a given time window
+    addPatient() – creates or updates a Patient with a new record
    
+
+    DataRetriever:
+    Attributes: 
+    Methods:
+    getPatient() – fetches a specific patient from DataStorage
+    getDataInTimeInterval() – returns patient records of a given type in a time interval
+    removePatient() – deletes a patient from the system
+    removeRecords() – deletes all records of a certain type within a time range
+    Provides operations for accessing and modifying data stored in DataStorage. 
 
 
 

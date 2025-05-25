@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.alerts.AlertGenerator;
+import com.alerts.AlertGeneratorWeek3;
 
 /**
  * Manages storage and retrieval of patient data within a healthcare monitoring
@@ -13,8 +13,7 @@ import com.alerts.AlertGenerator;
  * patient IDs.
  */
 public class DataStorage {
-    private Map<Integer, Patient> patientMap; // Stores patient objects indexed by their unique patient ID.
-
+    private Map<Integer, Patient> patientMap; 
     /**
      * Constructs a new instance of DataStorage, initializing the underlying storage
      * structure.
@@ -63,7 +62,7 @@ public class DataStorage {
         if (patient != null) {
             return patient.getRecords(startTime, endTime);
         }
-        return new ArrayList<>(); // return an empty list if no patient is found
+        return new ArrayList<>();
     }
 
     /**
