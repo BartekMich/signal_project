@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.alerts.AlertGenerator;
+import java.util.concurrent.ConcurrentHashMap;//Added concurrect HashMap to ensure safety of read-modify-write operation and to avoid race conditions
 
 /**
  * Singleton version of the DataStorage class that manages patient records.
  */
 public class DataStorageSingleton {
-    private static DataStorage instance;
+    private static DataStorageSingleton instance;
     private Map<Integer, Patient> patientMap; // Stores patient objects indexed by their unique patient ID.
 
     /**
      * Private constructor to enforce Singleton pattern.
      */
     private DataStorageSingleton() {
-        this.patientMap = new HashMap<>();
+        this.patientMap = new ConcurrentHashMap<>();
     }
 
     /**
@@ -25,9 +25,9 @@ public class DataStorageSingleton {
      *
      * @return the singleton instance
      */
-    public static synchronized DataStorage getInstance() {
+    public static synchronized DataStorageSingleton getInstance() {
         if (instance == null) {
-            instance = new DataStorage();
+            instance = new DataStorageSingleton();
         }
         return instance;
     }
@@ -41,12 +41,21 @@ public class DataStorageSingleton {
      * @param timestamp        the time at which the measurement was taken, in milliseconds since the Unix epoch
      */
     public void addPatientData(int patientId, double measurementValue, String recordType, long timestamp) {
-        Patient patient = patientMap.get(patientId);
-        if (patient == null) {
-            patient = new Patient(patientId);
-            patientMap.put(patientId, patient);
-        }
-        patient.addRecord(measurementValue, recordType, timestamp);
+        // Compute or create patient atomically
+        patientMap.compute(patientId, (id, patient) -> {
+            if (patient == null) {
+                patient = new Patient(patientId);
+            }
+            synchronized (patient) {
+                // Check if a record with the same timestamp and type already exists to avoid duplicates
+                boolean duplicate = patient.getRecords(timestamp, timestamp).stream().anyMatch(r -> r.getRecordType().equals(recordType));
+
+                if (!duplicate) {
+                    patient.addRecord(measurementValue, recordType, timestamp);
+                }
+            }
+            return patient;
+        });
     }
 
     /**
@@ -60,7 +69,9 @@ public class DataStorageSingleton {
     public List<PatientRecord> getRecords(int patientId, long startTime, long endTime) {
         Patient patient = patientMap.get(patientId);
         if (patient != null) {
-            return patient.getRecords(startTime, endTime);
+            synchronized (patient) {
+                return patient.getRecords(startTime, endTime);
+            }
         }
         return new ArrayList<>();
     }
@@ -74,7 +85,8 @@ public class DataStorageSingleton {
         return new ArrayList<>(patientMap.values());
     }
 
-    public static void main(String[] args) {
-        // Entry point left intentionally blank or for future testing/demo purposes
+    public void clear() {
+        patientMap.clear();
     }
+
 }

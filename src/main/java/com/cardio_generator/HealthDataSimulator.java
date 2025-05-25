@@ -38,20 +38,16 @@ public class HealthDataSimulator {
 
     public static void main(String[] args) throws IOException {
 
-        //parseArguments(args);
+        parseArguments(args);
 
-        //scheduler = Executors.newScheduledThreadPool(patientCount * 4);
+        scheduler = Executors.newScheduledThreadPool(patientCount * 4);
 
-        //List<Integer> patientIds = initializePatientIds(patientCount);
-        //Collections.shuffle(patientIds); // Randomize the order of patient IDs
+        List<Integer> patientIds = initializePatientIds(patientCount);
+        Collections.shuffle(patientIds); // Randomize the order of patient IDs
 
-        //scheduleTasksForPatients(patientIds);
-
-       
-        
-
-
+        scheduleTasksForPatients(patientIds);
     }
+
 
     /**
  * The {@code HealthDataSimulator} class simulates the generation of health data for a specific number of patients.
